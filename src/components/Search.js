@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import 'whatwg-fetch';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import injectTapEventPlugin from 'react-tap-event-plugin'; //http://www.material-ui.com/#/get-started/installation
 injectTapEventPlugin();
@@ -18,6 +19,7 @@ class Search extends React.Component {
     };
 
     this.selectItems = this.selectItems.bind(this);
+    this.getShortestPath = this.getShortestPath.bind(this);
   }
 
   componentDidMount() {
@@ -39,6 +41,10 @@ class Search extends React.Component {
     return <MenuItem value={index} primaryText={item} key={index}/>;
   }
 
+  getShortestPath() {
+    this.props.getShortestPath();
+  }
+
   render() {
     return (
       <div>
@@ -58,6 +64,8 @@ class Search extends React.Component {
         >
           {places.map(this.selectItems)}
         </SelectField>
+        <br/>
+        <RaisedButton label="Search" primary={true} onTouchTap={this.getShortestPath}/>
       </div>
     );
   }

@@ -9,6 +9,7 @@ export default function ShortestPath(state = {}, action) {
 
         worker.addEventListener('message', function(e) {
           console.log('Worker said: ', e.data);
+          worker.terminate();
         }, false);
 
         return action;

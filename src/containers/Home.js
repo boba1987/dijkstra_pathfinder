@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import Home from '../components/Home';
+import Search from '../components/Search';
 import * as actions from '../actions/HomeActions';
 
-export const HomePage = () => {
+export const HomePage = (props) => {
   return (
-    <Home/>
+    <Search getShortestPath={props.actions.getShortestPath}/>
   );
 };
 

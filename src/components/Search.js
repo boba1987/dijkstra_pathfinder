@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import 'whatwg-fetch';
@@ -8,7 +9,7 @@ injectTapEventPlugin();
 
 let places = [];
 
-class Home extends React.Component {
+class Search extends React.Component {
   constructor(props, context) {
     super(props, context);
 
@@ -41,7 +42,7 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <h2>Get Started</h2>
+        <h2>Trip Sorter</h2>
         <SelectField
           onChange={(event, index, value) => this.setState({from: value})}
           floatingLabelText="From"
@@ -62,4 +63,8 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+Search.propTypes = {
+  getShortestPath: PropTypes.func.isRequired
+};
+
+export default Search;

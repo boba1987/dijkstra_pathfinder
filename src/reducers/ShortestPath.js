@@ -4,7 +4,13 @@ export default function ShortestPath(state = {}, action) {
   switch (action.type) {
     case types.GET_SHORTEST_PATH:
       {
-        console.log(action);
+        const worker = new Worker('../worker.js');
+        worker.postMessage(action);
+
+        worker.addEventListener('message', function(e) {
+          console.log('Worker said: ', e.data);
+        }, false);
+
         return action;
       }
     default:

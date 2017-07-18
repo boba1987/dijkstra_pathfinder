@@ -1,9 +1,22 @@
 import React from 'react';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 import 'whatwg-fetch';
+
+import injectTapEventPlugin from 'react-tap-event-plugin'; //http://www.material-ui.com/#/get-started/installation
+injectTapEventPlugin();
+
+let places = [];
 
 class Home extends React.Component {
   constructor(props, context) {
     super(props, context);
+
+    this.state = {
+      deals: []
+    };
+
+    this.selectItems = this.selectItems.bind(this);
   }
 
   componentDidMount() {
@@ -12,14 +25,38 @@ class Home extends React.Component {
         return response.json();
       })
       .then(data => {
-        console.log(data);
+        data.deals.map(item => {
+          if (places.indexOf(item.departure) == -1 ) {
+            places.push(item.departure);
+          }
+        });
+        this.setState({deals: data.deals});
       });
+  }
+
+  selectItems(item, index) {
+    return <MenuItem value={index} primaryText={item} key={index}/>;
   }
 
   render() {
     return (
       <div>
         <h2>Get Started</h2>
+        <SelectField
+          onChange={(event, index, value) => this.setState({from: value})}
+          floatingLabelText="From"
+          value={this.state.from}
+        >
+          {places.map(this.selectItems)}
+        </SelectField>
+        &nbsp;
+        <SelectField
+          onChange={(event, index, value) => this.setState({to: value})}
+          floatingLabelText="To"
+          value={this.state.to}
+        >
+          {places.map(this.selectItems)}
+        </SelectField>
       </div>
     );
   }

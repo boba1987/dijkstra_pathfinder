@@ -15,9 +15,9 @@ HomePage.propTypes = {
   actions: PropTypes.object.isRequired
 };
 
-function mapStateToProps() {
+function mapStateToProps(state) {
   return {
-
+    shortestPath: state.ShortestPath
   };
 }
 

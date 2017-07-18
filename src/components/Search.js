@@ -15,7 +15,8 @@ class Search extends React.Component {
     super(props, context);
 
     this.state = {
-      deals: []
+      deals: [],
+      validationError: ''
     };
 
     this.selectItems = this.selectItems.bind(this);
@@ -42,7 +43,17 @@ class Search extends React.Component {
   }
 
   getShortestPath() {
-    this.props.getShortestPath(this.state.deals, places[this.state.from], places[this.state.to]);
+    if (this.state.from != undefined && this.state.to != undefined) {
+      if (this.state.from == this.state.to) {
+        this.setState({validationError: 'Please, select different destinations.'});
+        return;
+      }
+      this.setState({validationError: ''});
+      this.props.getShortestPath(this.state.deals, places[this.state.from], places[this.state.to]);
+      return;
+    }
+    
+    this.setState({validationError: 'Please, select both destinations.'});
   }
 
   render() {
@@ -64,6 +75,10 @@ class Search extends React.Component {
         >
           {places.map(this.selectItems)}
         </SelectField>
+        <br/>
+        <span>
+          {this.state.validationError}
+        </span>
         <br/>
         <RaisedButton label="Search" primary={true} onTouchTap={this.getShortestPath}/>
       </div>

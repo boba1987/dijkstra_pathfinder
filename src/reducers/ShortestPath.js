@@ -4,15 +4,22 @@ export default function ShortestPath(state = {}, action) {
   switch (action.type) {
     case types.GET_SHORTEST_PATH:
       {
-        const worker = new Worker('../worker.js');
+        const worker = new Worker('./worker.js');
         worker.postMessage(action);
 
-        worker.addEventListener('message', function(e) {
-          console.log('Worker said: ', e.data);
-          worker.terminate();
-        }, false);
+        let actionPromise = new Promise((resolve, reject) => {
+          worker.addEventListener('message', function(e) {
+            resolve(e.data);
+            console.log('Worker said: ', e.data);
+            worker.terminate();
+          }, false);
 
-        return action;
+          worker.addEventListener('error', function(e) {
+            reject(e);
+          }, false);
+        });
+
+        return actionPromise;
       }
     default:
       return state;

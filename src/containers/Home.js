@@ -4,10 +4,14 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Search from '../components/Search';
 import * as actions from '../actions/HomeActions';
+import PathMap from '../components/PathMap';
 
 export const HomePage = (props) => {
   return (
-    <Search getShortestPath={props.actions.getShortestPath}/>
+    <div>
+      <Search getShortestPath={props.actions.getShortestPath}/>
+      <PathMap shortestPath={props.shortestPath}/>
+    </div>
   );
 };
 
@@ -26,6 +30,10 @@ function mapDispatchToProps(dispatch) {
     actions: bindActionCreators(actions, dispatch)
   };
 }
+
+HomePage.propTypes = {
+  shortestPath: PropTypes.object.isRequired
+};
 
 export default connect(
   mapStateToProps,

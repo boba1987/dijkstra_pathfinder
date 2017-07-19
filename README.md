@@ -1,4 +1,4 @@
-# Property finder test
+# Property finder
 
 ### Instalation
 1. **Initial Machine Setup**

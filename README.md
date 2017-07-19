@@ -8,6 +8,8 @@
 2. **Project start**
  - npm install
  - npm start
+
+ Open another tab and start mock backend:
  - cd backend
  - npm install
  - node server.js

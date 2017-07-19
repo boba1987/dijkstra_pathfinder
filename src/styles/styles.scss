@@ -1,7 +1,17 @@
 body {
   margin: 0;
+  padding-top: 60px;
 }
 
 .hide {
   display: none !important;
+}
+
+#mapHolder {
+  height: 100%;
+  width: 50%;
+  display: block;
+  position: fixed !important;
+  top: 0;
+  right: 0;
 }

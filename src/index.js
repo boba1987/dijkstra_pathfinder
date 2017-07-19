@@ -27,6 +27,7 @@ render(
         <AppBar
           title={'Trip Sorter'}
           showMenuIconButton={false}
+          style={{position: 'fixed', top: 0, left: 0, width: '100%'}}
         />
         <Root store={store} history={history} />
       </div>

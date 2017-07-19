@@ -20,7 +20,7 @@ export const HomePage = (props) => {
           <PathMap shortestPath={props.shortestPath}/>
         </GridTile>
         <GridTile cols={6}>
-          <Map/>
+          <Map shortestPath={props.shortestPath}/>
         </GridTile>
       </GridList>
     </div>

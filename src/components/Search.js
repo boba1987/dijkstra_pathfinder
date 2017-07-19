@@ -27,7 +27,7 @@ class Search extends React.Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:9000/api')
+    fetch('https://sleepy-dusk-47536.herokuapp.com/api')
       .then(response => {
         return response.json();
       })

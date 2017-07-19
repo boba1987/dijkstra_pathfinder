@@ -4,6 +4,7 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import 'whatwg-fetch';
 import RaisedButton from 'material-ui/RaisedButton';
+import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 
 import injectTapEventPlugin from 'react-tap-event-plugin'; //http://www.material-ui.com/#/get-started/installation
 injectTapEventPlugin();
@@ -16,11 +17,13 @@ class Search extends React.Component {
 
     this.state = {
       deals: [],
-      validationError: ''
+      validationError: '',
+      criteria: 'priceTotal'
     };
 
     this.selectItems = this.selectItems.bind(this);
     this.getShortestPath = this.getShortestPath.bind(this);
+    this.handleCriteriaChange = this.handleCriteriaChange.bind(this);
   }
 
   componentDidMount() {
@@ -38,6 +41,14 @@ class Search extends React.Component {
       });
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if(nextState.criteria != this.state.criteria) {
+      return false;
+    }
+
+    return true;
+  }
+
   selectItems(item, index) {
     return <MenuItem value={index} primaryText={item} key={index}/>;
   }
@@ -49,11 +60,15 @@ class Search extends React.Component {
         return;
       }
       this.setState({validationError: ''});
-      this.props.getShortestPath(this.state.deals, places[this.state.from], places[this.state.to]);
+      this.props.getShortestPath(this.state.deals, places[this.state.from], places[this.state.to], this.state.criteria);
       return;
     }
-    
+
     this.setState({validationError: 'Please, select both destinations.'});
+  }
+
+  handleCriteriaChange(event, value) {
+    this.setState({criteria: value});
   }
 
   render() {
@@ -76,6 +91,16 @@ class Search extends React.Component {
           {places.map(this.selectItems)}
         </SelectField>
         <br/>
+        <RadioButtonGroup name="criteria" defaultSelected="priceTotal" onChange={this.handleCriteriaChange}>
+          <RadioButton
+            value="priceTotal"
+            label="Cheapest"
+          />
+          <RadioButton
+            value="durationMinutes"
+            label="Fastest"
+          />
+        </RadioButtonGroup>
         <span>
           {this.state.validationError}
         </span>

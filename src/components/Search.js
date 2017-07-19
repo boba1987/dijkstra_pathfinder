@@ -74,7 +74,6 @@ class Search extends React.Component {
   render() {
     return (
       <div>
-        <h2>Trip Sorter</h2>
         <SelectField
           onChange={(event, index, value) => this.setState({from: value})}
           floatingLabelText="From"

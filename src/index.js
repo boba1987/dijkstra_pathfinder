@@ -14,6 +14,8 @@ import { syncHistoryWithStore } from 'react-router-redux';
 
 const store = configureStore();
 
+import AppBar from 'material-ui/AppBar';
+
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore(browserHistory, store);
 
@@ -21,7 +23,13 @@ const history = syncHistoryWithStore(browserHistory, store);
 render(
   <MuiThemeProvider>
     <AppContainer>
-      <Root store={store} history={history} />
+      <div>
+        <AppBar
+          title={'Trip Sorter'}
+          showMenuIconButton={false}
+        />
+        <Root store={store} history={history} />
+      </div>
     </AppContainer>
   </MuiThemeProvider>,
   document.getElementById('app')

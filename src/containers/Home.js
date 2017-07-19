@@ -8,7 +8,7 @@ import PathMap from '../components/PathMap';
 
 export const HomePage = (props) => {
   return (
-    <div>
+    <div style={{margin: '0 10px'}}>
       <Search getShortestPath={props.actions.getShortestPath}/>
       <PathMap shortestPath={props.shortestPath}/>
     </div>

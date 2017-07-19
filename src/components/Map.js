@@ -5,6 +5,7 @@ const Q = require('q');
 
 let map = null;
 let Google = null;
+let Path = null;
 
 function getCoords(cities) {
   const deferred = Q.defer();
@@ -57,24 +58,13 @@ class Map extends React.Component {
       };
 
       map = new Google.maps.Map(el, mapOptions);
-
-      const flightPlanCoordinates = [
-          {lat: 48, lng: 6},
-          {lat: 49, lng: 9},
-        ];
-      const flightPath = new google.maps.Polyline({
-        path: flightPlanCoordinates,
-        geodesic: true,
-        strokeColor: '#FF0000',
-        strokeOpacity: 1.0,
-        strokeWeight: 2
-      });
-
-      flightPath.setMap(map);
     });
   }
 
   componentWillUpdate(nextProps) {
+    if (Path !== null) {
+      Path.setMap(null);
+    }
     // get city coords with https://maps.googleapis.com/maps/api/geocode/json?address=Moscow
     nextProps.shortestPath.then(path => {
       let cities = [];
@@ -87,7 +77,21 @@ class Map extends React.Component {
       }
 
       getCoords(cities).then(res => {
-        console.log(res);
+        const PathCoordinates = [];
+
+        for(let i=0; i<res.length;i++) {
+          PathCoordinates.push(res[i].geometry.location);
+        }
+
+        Path = new Google.maps.Polyline({
+          path: PathCoordinates,
+          geodesic: true,
+          strokeColor: '#FF0000',
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        Path.setMap(map);
       });
     });
   }

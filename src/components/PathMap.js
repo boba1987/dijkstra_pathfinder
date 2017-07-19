@@ -1,12 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Forward from 'material-ui/svg-icons/content/forward';
+import Train from 'material-ui/svg-icons/maps/train';
+import DirectionsBus from 'material-ui/svg-icons/maps/directions-bus';
+import DirectionsCar from 'material-ui/svg-icons/maps/directions-car';
 import {
   Step,
   Stepper,
   StepLabel,
   StepContent,
 } from 'material-ui/Stepper';
+
+const style = {
+  iconColor: 'rgb(0, 188, 212)'
+};
 
 class PathMap extends React.Component {
   constructor(props, context) {
@@ -35,9 +41,11 @@ class PathMap extends React.Component {
     return (
       <Step key={index}>
         <StepLabel active={true}>
-          {node.from}
-           <Forward/>
-           {node.to.arrival}
+          {node.from}&nbsp;
+           <Train color={style.iconColor} className={(node.to.transport == 'train' ? 'show' : 'hide')}/>
+           <DirectionsBus color={style.iconColor}  className={(node.to.transport == 'bus' ? 'show' : 'hide')}/>
+           <DirectionsCar color={style.iconColor} className={(node.to.transport == 'car' ? 'show' : 'hide')}/>
+           &nbsp;{node.to.arrival}
         </StepLabel>
         <StepContent active={true}>
           Cost: <b>&euro;{node.to.priceTotal}</b>

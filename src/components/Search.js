@@ -100,11 +100,12 @@ class Search extends React.Component {
             label="Fastest"
           />
         </RadioButtonGroup>
+        <br/>
+        <RaisedButton label="Search" primary={true} onTouchTap={this.getShortestPath}/>
+        &nbsp;&nbsp;
         <span>
           {this.state.validationError}
         </span>
-        <br/>
-        <RaisedButton label="Search" primary={true} onTouchTap={this.getShortestPath}/>
       </div>
     );
   }

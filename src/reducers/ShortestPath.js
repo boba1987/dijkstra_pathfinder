@@ -10,7 +10,6 @@ export default function ShortestPath(state = {}, action) {
         let actionPromise = new Promise((resolve, reject) => {
           worker.addEventListener('message', function(e) {
             resolve(e.data);
-            console.log('Worker said: ', e.data);
             worker.terminate();
           }, false);
 

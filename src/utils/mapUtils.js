@@ -19,7 +19,12 @@ module.exports = function GetCoords(cities) {
   }
 
   Q.all(qArr).then(function(){
-    deferred.resolve(toReturn);
+    let sortedToReturn = new Array(cities.length);
+    // Sort array to return according to original path
+    for (let i=0;i<toReturn.length;i++) {
+      sortedToReturn[cities.indexOf(toReturn[i].formatted_address.split(',')[0])] = toReturn[i];
+    }
+    deferred.resolve(sortedToReturn);
   });
 
   return deferred.promise;

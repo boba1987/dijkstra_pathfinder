@@ -6,6 +6,7 @@ const Q = require('q');
 let map = null;
 let Google = null;
 let Path = null;
+let markers = [];
 
 function getCoords(cities) {
   const deferred = Q.defer();
@@ -65,6 +66,13 @@ class Map extends React.Component {
     if (Path !== null) {
       Path.setMap(null);
     }
+
+    if (markers.length) { // Reset markers
+      for(let i=0; i<markers.length; i++) {
+        markers[i].setMap(null);
+      }
+    }
+
     // get city coords with https://maps.googleapis.com/maps/api/geocode/json?address=Moscow
     nextProps.shortestPath.then(path => {
       let cities = [];
@@ -85,11 +93,13 @@ class Map extends React.Component {
             label = i.toString();
           }
 
-          new Google.maps.Marker({
+          let marker = new Google.maps.Marker({
             position: res[i].geometry.location,
             label: label,
             map: map
           });
+          markers.push(marker);
+
           PathCoordinates.push(res[i].geometry.location);
         }
 

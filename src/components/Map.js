@@ -17,6 +17,7 @@ class Map extends React.Component {
     const el = document.getElementById('mapHolder');
 
     GoogleMapsLoader.LIBRARIES = ['visualization'];
+    GoogleMapsLoader.KEY = 'AIzaSyCMHOzjzWM5NflaW76gpV_sOQ4117cewlY';
     GoogleMapsLoader.load(function(google) {
       Google = google;
       const mapOptions = {

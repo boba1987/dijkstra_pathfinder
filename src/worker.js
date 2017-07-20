@@ -4,6 +4,9 @@
 function PriorityQueue () {
     this._nodes = [];
 
+    /**
+    * Push all generated nodes
+    */
     this.enqueue = function (priority, key) {
         this._nodes.push({key: key, priority: priority });
         this.sort();
@@ -11,11 +14,17 @@ function PriorityQueue () {
     this.dequeue = function () {
         return this._nodes.shift().key;
     };
+    /**
+    * Sort all generated nodes by priority - cost, time
+    */
     this.sort = function () {
         this._nodes.sort(function (a, b) {
             return a.priority - b.priority;
         });
     };
+    /**
+    Check if all nodes are visited
+    */
     this.isEmpty = function () {
         return !this._nodes.length;
     };
@@ -28,10 +37,16 @@ function Graph(){
     let INFINITY = 1/0;
     this.vertices = {};
 
+    /**
+    * Generate graph nodes
+    */
     this.addVertex = function(name, edges){
         this.vertices[name] = edges;
     };
 
+    /**
+    * Generate graph
+    */
     this.shortestPath = function (start, finish) {
         let nodes = new PriorityQueue(),
             distances = {},
@@ -86,6 +101,9 @@ function Graph(){
     };
 }
 
+/**
+* Extract only criteria of interest
+*/
 function reduceVertexInfo(info, e) {
     for (let dep in info) {
         for (let arr in info[dep]) {
@@ -96,6 +114,9 @@ function reduceVertexInfo(info, e) {
     return info;
 }
 
+/**
+* Format response so it can be used by Pathfinding algorithm
+*/
 function getVertexInfo(response, e) {
     let info = {};
 

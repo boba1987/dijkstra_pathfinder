@@ -6,7 +6,7 @@ module.exports = function GetCoords(cities) {
 
   let qArr = [];
 
-  for (let i=0;i<cities.length;i++) {
+  for (let i=0;i<cities.length;i++) { // Create Q
     qArr.push(
       fetch('https://maps.googleapis.com/maps/api/geocode/json?address=' + cities[i]).then(result => {
         return result.json();
@@ -18,7 +18,7 @@ module.exports = function GetCoords(cities) {
     );
   }
 
-  Q.all(qArr).then(function(){
+  Q.all(qArr).then(function(){ // Run calls in parallel
     let sortedToReturn = new Array(cities.length);
     // Sort array to return according to original path
     for (let i=0;i<toReturn.length;i++) {

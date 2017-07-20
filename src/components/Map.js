@@ -80,6 +80,13 @@ class Map extends React.Component {
         const PathCoordinates = [];
 
         for(let i=0; i<res.length;i++) {
+          if (i != 0) {
+            new Google.maps.Marker({
+              position: res[i].geometry.location,
+              label: i.toString(),
+              map: map
+            });
+          }
           PathCoordinates.push(res[i].geometry.location);
         }
 
@@ -88,7 +95,7 @@ class Map extends React.Component {
           scale: 1,
           strokeColor: 'rgb(0, 188, 212)',
           fillColor: 'rgb(0, 188, 212)',
-          fillOpacity: 0.5,
+          fillOpacity: 1,
           strokeWeight: 3
         };
 

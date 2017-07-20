@@ -80,13 +80,16 @@ class Map extends React.Component {
         const PathCoordinates = [];
 
         for(let i=0; i<res.length;i++) {
+          let label = '';
           if (i != 0) {
-            new Google.maps.Marker({
-              position: res[i].geometry.location,
-              label: i.toString(),
-              map: map
-            });
+            label = i.toString();
           }
+
+          new Google.maps.Marker({
+            position: res[i].geometry.location,
+            label: label,
+            map: map
+          });
           PathCoordinates.push(res[i].geometry.location);
         }
 

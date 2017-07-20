@@ -18,7 +18,9 @@ import AppBar from 'material-ui/AppBar';
 
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore(browserHistory, store);
+const response = require('../response.json');
 
+window.response = response;
 
 render(
   <MuiThemeProvider>

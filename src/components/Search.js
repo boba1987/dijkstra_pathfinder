@@ -16,9 +16,10 @@ class Search extends React.Component {
     super(props, context);
 
     this.state = {
-      deals: [],
+      deals: window.response.deals,
       validationError: '',
-      criteria: 'priceTotal'
+      criteria: 'priceTotal',
+      places: []
     };
 
     this.selectItems = this.selectItems.bind(this);
@@ -27,18 +28,13 @@ class Search extends React.Component {
   }
 
   componentDidMount() {
-    fetch('https://sleepy-dusk-47536.herokuapp.com/api')
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        data.deals.map(item => {
-          if (places.indexOf(item.departure) == -1 ) {
-            places.push(item.departure);
-          }
-        });
-        this.setState({deals: data.deals});
-      });
+    window.response.deals.map(item => {
+      if (places.indexOf(item.departure) == -1 ) {
+        places.push(item.departure);
+      }
+    });
+
+    this.setState({places});
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -79,7 +75,7 @@ class Search extends React.Component {
           floatingLabelText="From"
           value={this.state.from}
         >
-          {places.map(this.selectItems)}
+          {this.state.places.map(this.selectItems)}
         </SelectField>
         &nbsp;
         <SelectField
@@ -87,7 +83,7 @@ class Search extends React.Component {
           floatingLabelText="To"
           value={this.state.to}
         >
-          {places.map(this.selectItems)}
+          {this.state.places.map(this.selectItems)}
         </SelectField>
         <br/>
         <RadioButtonGroup name="criteria" defaultSelected="priceTotal" onChange={this.handleCriteriaChange}>

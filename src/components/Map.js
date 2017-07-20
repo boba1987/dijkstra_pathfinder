@@ -83,15 +83,40 @@ class Map extends React.Component {
           PathCoordinates.push(res[i].geometry.location);
         }
 
+        let lineSymbol = {
+          path: 'M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z',
+          scale: 1,
+          strokeColor: 'rgb(0, 188, 212)',
+          fillColor: 'rgb(0, 188, 212)',
+          fillOpacity: 0.5,
+          strokeWeight: 3
+        };
+
         Path = new Google.maps.Polyline({
           path: PathCoordinates,
           geodesic: true,
           strokeColor: '#FF0000',
-          strokeOpacity: 1.0,
-          strokeWeight: 2
+          strokeOpacity: 0.7,
+          strokeWeight: 2,
+          icons: [{
+            icon: lineSymbol,
+            offset: '100%'
+          }],
+          map: map
         });
 
-        Path.setMap(map);
+        animateCircle(Path);
+
+        function animateCircle(line) {
+          let count = 0;
+          window.setInterval(function() {
+            count = (count + 1) % 200;
+
+            let icons = line.get('icons');
+            icons[0].offset = (count / 2) + '%';
+            line.set('icons', icons);
+          }, 80);
+        }
       });
     });
   }

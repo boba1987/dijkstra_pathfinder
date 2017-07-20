@@ -15,7 +15,7 @@ export const HomePage = (props) => {
             cols={12}
             cellHeight={'auto'}
       >
-        <GridTile cols={6}>
+        <GridTile cols={6} style={{overflow: 'visible'}}>
           <Search getShortestPath={props.actions.getShortestPath}/>
           <PathMap shortestPath={props.shortestPath}/>
         </GridTile>

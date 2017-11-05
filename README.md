@@ -2,7 +2,7 @@
 
 ## Javascript implementation of https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
 
-### For algorithm implementation check worker.js
+For algorithm implementation check **worker.js**
 
 ### Instalation
 1. **Initial Machine Setup**

@@ -1,5 +1,7 @@
 # Property finder
 
+## Javascript implementation of https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
+
 ### Instalation
 1. **Initial Machine Setup**
  requirements:

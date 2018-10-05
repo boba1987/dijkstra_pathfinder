@@ -1,6 +1,6 @@
 # Property finder
 
-# Javascript implementation of https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
+## Javascript implementation of https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
 
 For algorithm implementation check https://github.com/boba1987/dijkstra_pathfinder/blob/new-master/src/worker.js
 

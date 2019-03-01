@@ -1,4 +1,4 @@
-# Property finder
+# Dijkstra shortest path algotithm implementation
 
 ## Javascript implementation of https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
 
